@@ -34,9 +34,11 @@ public class ARTapToPlaceObject : MonoBehaviour
     private List<GameObject> _corners;
     private List<GameObject> _walls;
     private List<GameObject> _props;
+    private Camera _camera;
 
     void Start()
     {        
+        _camera = Camera.main;
         _raycastManager = FindObjectOfType<ARRaycastManager>();
         _planeManager = FindObjectOfType<ARPlaneManager>();
         _perimeterLine.positionCount = 0;
@@ -65,6 +67,7 @@ public class ARTapToPlaceObject : MonoBehaviour
     {
         _perimeterLine.loop = true;
         _isPerimeterReady = true;
+        _planeManager.enabled = false;
         
         for (int i = 0; i < _corners.Count; i++)
         {
@@ -104,6 +107,7 @@ public class ARTapToPlaceObject : MonoBehaviour
     public void ResetPerimeter()
     {
         _perimeterLine.positionCount = 0;
+        _planeManager.enabled = true;
         SetPlacementIndicator();
         _perimeterLine.loop = false;
         _isFloorLevel = false;
@@ -162,12 +166,12 @@ public class ARTapToPlaceObject : MonoBehaviour
 
     private void UpdatePlacementPoint() 
     {
-        var screenCenter = Camera.main.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, 0.5f));
+        var screenCenter = _camera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, 0.5f));
         
         if (_isPerimeterReady)
         {
             RaycastHit hit;
-            Physics.Raycast(Camera.main.ScreenPointToRay(screenCenter), out hit);
+            Physics.Raycast(_camera.ScreenPointToRay(screenCenter), out hit);
 
             if (hit.collider != null)
             {
@@ -196,13 +200,13 @@ public class ARTapToPlaceObject : MonoBehaviour
                     _placementPose.position.y = _floorLevel;
                 }
 
-                var cameraForward = Camera.main.transform.forward;
+                var cameraForward = _camera.transform.forward;
                 var cameraBearing = new Vector3(cameraForward.x, 0, cameraForward.z).normalized;
                 _placementPose.rotation = Quaternion.LookRotation(cameraBearing);
             }
             else 
             {
-                var planeHits = _planeManager.Raycast(Camera.main.ScreenPointToRay(screenCenter), TrackableType.Planes, new Allocator());
+                var planeHits = _planeManager.Raycast(_camera.ScreenPointToRay(screenCenter), TrackableType.Planes, new Allocator());
                 if (planeHits.Length > 0) 
                 {
                     _placementPose = planeHits[0].pose;
@@ -212,7 +216,7 @@ public class ARTapToPlaceObject : MonoBehaviour
                         _placementPose.position.y = _floorLevel;
                     }
 
-                    var cameraForward = Camera.main.transform.forward;
+                    var cameraForward = _camera.transform.forward;
                     var cameraBearing = new Vector3(cameraForward.x, 0, cameraForward.z).normalized;
                     _placementPose.rotation = Quaternion.LookRotation(cameraBearing);
                 }                

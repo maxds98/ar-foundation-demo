@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Asus\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Asus\.Rider2019.3\system\resharper-host\Local\Transient\ReSharperHost\v193\SolutionCaches\_ar-foundation-demo.-1375966663.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Asus\Documents\ar-foundation-demo" t="IncludeRecursive">
+      <e p="ar-foundation-demo.sln" t="IncludeFlat" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="ARTapToPlaceObject.cs" t="Include" />
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
