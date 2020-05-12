@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using Unity.Collections;
 using UnityEngine;
@@ -71,8 +72,13 @@ public class ARTapToPlaceObject : MonoBehaviour
         
         for (int i = 0; i < _corners.Count; i++)
         {
+            var previousCornerPos = _corners[i > 0 ? i - 1 : _corners.Count - 1].transform.position;
             var currentCornerPos = _corners[i].transform.position;
-            var nextCurnerPos = _corners[i < _corners.Count - 1 ? i + 1 : 0].transform.position;
+            var nextCornerPos = _corners[i < _corners.Count - 1 ? i + 1 : 0].transform.position;
+
+            var corner = _corners[i].AddComponent<Corner>();
+            corner.angle = SignedAngle(previousCornerPos - currentCornerPos, nextCornerPos - currentCornerPos);
+            
             var wall = Instantiate(_wallPrefab);
             _walls.Add(wall);
             var wallMeshFilter = wall.GetComponent<MeshFilter>();
@@ -93,8 +99,8 @@ public class ARTapToPlaceObject : MonoBehaviour
 
             vertices[0] = currentCornerPos;
             vertices[1] = currentCornerPos + Vector3.up * 2.5f;
-            vertices[2] = nextCurnerPos;
-            vertices[3] = nextCurnerPos + Vector3.up * 2.5f;
+            vertices[2] = nextCornerPos;
+            vertices[3] = nextCornerPos + Vector3.up * 2.5f;
 
             wallMeshFilter.mesh.vertices = vertices;
             wallMeshFilter.mesh.triangles = triangles;
@@ -102,6 +108,12 @@ public class ARTapToPlaceObject : MonoBehaviour
 
             wall.AddComponent<MeshCollider>();
         }
+    }
+    
+    private float SignedAngle(Vector3 a, Vector3 b){
+        var angle = Vector3.Angle(a, b); // calculate angle
+        // assume the sign of the cross product's Y component:
+        return angle * Mathf.Sign(Vector3.Cross(a, b).y);
     }
 
     public void ResetPerimeter()
@@ -143,9 +155,11 @@ public class ARTapToPlaceObject : MonoBehaviour
     public void PlaceProp() 
     {
         SetPlacementIndicator();
-        if (_placementPoseIsValid) 
+        if (_placementPoseIsValid)
         {
-            var prop = Instantiate(_propPrefab, _placementPose.position, _placementPose.rotation);
+            var minDistance = _corners.Min(c => Vector3.Distance(c.transform.position, _placementPose.position));
+            
+            var prop = Instantiate(_propPrefab, _corners.First(c => Math.Abs(Vector3.Distance(c.transform.position, _placementPose.position) - minDistance) < 0.01f).transform.position, _placementPose.rotation);
             prop.SetActive(true);
             _props.Add(prop);
         }
@@ -206,7 +220,7 @@ public class ARTapToPlaceObject : MonoBehaviour
             }
             else 
             {
-                var planeHits = _planeManager.Raycast(_camera.ScreenPointToRay(screenCenter), TrackableType.Planes, new Allocator());
+                var planeHits = _planeManager.Raycast(_camera.ScreenPointToRay(screenCenter), TrackableType.Planes, Allocator.Temp);
                 if (planeHits.Length > 0) 
                 {
                     _placementPose = planeHits[0].pose;
@@ -219,7 +233,8 @@ public class ARTapToPlaceObject : MonoBehaviour
                     var cameraForward = _camera.transform.forward;
                     var cameraBearing = new Vector3(cameraForward.x, 0, cameraForward.z).normalized;
                     _placementPose.rotation = Quaternion.LookRotation(cameraBearing);
-                }                
+                }        
+                
             }
         }
         
