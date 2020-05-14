@@ -8,8 +8,13 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
+          <e p="ARSessionController.cs" t="Include" />
           <e p="ARTapToPlaceObject.cs" t="Include" />
           <e p="Corner.cs" t="Include" />
+          <e p="RoomData.cs" t="Include" />
+          <e p="RoomSynchronizer.cs" t="Include" />
+          <e p="Utils.cs" t="Include" />
+          <e p="Wall.cs" t="Include" />
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />

@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -37,6 +38,8 @@ public class ARTapToPlaceObject : MonoBehaviour
     private List<GameObject> _props;
     private Camera _camera;
 
+    [SerializeField] private Text _distanceText;
+
     void Start()
     {        
         _camera = Camera.main;
@@ -53,13 +56,22 @@ public class ARTapToPlaceObject : MonoBehaviour
     {
         UpdatePlacementPoint();
         UpdateIndicator();
-    }       
+        UpdateDistanceValue();
+    }
+
+    private void UpdateDistanceValue()
+    {
+        if (_corners.Count == 0) return;
+
+        _distanceText.text = Vector3.Distance(_corners.Last().transform.position, _placementPose.position).ToString();
+    }
 
     public void CreateCornerPoint() 
     {
         var cornerPoint = Instantiate(_cornerPointPrefab);
         _corners.Add(cornerPoint);
         cornerPoint.transform.position = _placementPose.position;
+        cornerPoint.transform.rotation = Quaternion.Euler(0f, -Input.compass.magneticHeading, 0f);
         _perimeterLine.positionCount += 1;
         _perimeterLine.SetPosition(_perimeterLine.positionCount - 1, _placementPose.position);        
     }
@@ -70,6 +82,9 @@ public class ARTapToPlaceObject : MonoBehaviour
         _isPerimeterReady = true;
         _planeManager.enabled = false;
         
+        var cornerPoint = Instantiate(_cornerPointPrefab);
+        cornerPoint.transform.position = Utils.GetCentroid(_corners);
+        
         for (int i = 0; i < _corners.Count; i++)
         {
             var previousCornerPos = _corners[i > 0 ? i - 1 : _corners.Count - 1].transform.position;
@@ -77,23 +92,25 @@ public class ARTapToPlaceObject : MonoBehaviour
             var nextCornerPos = _corners[i < _corners.Count - 1 ? i + 1 : 0].transform.position;
 
             var corner = _corners[i].AddComponent<Corner>();
-            corner.angle = SignedAngle(previousCornerPos - currentCornerPos, nextCornerPos - currentCornerPos);
+            corner.angle = Utils.GetSignedAngle(previousCornerPos - currentCornerPos, nextCornerPos - currentCornerPos);
             
             var wall = Instantiate(_wallPrefab);
             _walls.Add(wall);
             var wallMeshFilter = wall.GetComponent<MeshFilter>();
 
-            var triangles = new int[] 
+            var triangles = new [] 
             {
                 0, 3, 1,
                 3, 0, 2,
                 1, 3, 0,
                 2, 0, 3
             };
-            
-            var normals = wallMeshFilter.mesh.normals;
 
-            wallMeshFilter.mesh = new Mesh();
+            var mesh = wallMeshFilter.mesh;
+            var normals = mesh.normals;
+
+            mesh = new Mesh();
+            wallMeshFilter.mesh = mesh;
 
             var vertices = new Vector3[4];
 
@@ -102,18 +119,12 @@ public class ARTapToPlaceObject : MonoBehaviour
             vertices[2] = nextCornerPos;
             vertices[3] = nextCornerPos + Vector3.up * 2.5f;
 
-            wallMeshFilter.mesh.vertices = vertices;
-            wallMeshFilter.mesh.triangles = triangles;
-            wallMeshFilter.mesh.normals = normals;
+            mesh.vertices = vertices;
+            mesh.triangles = triangles;
+            mesh.normals = normals;
 
             wall.AddComponent<MeshCollider>();
         }
-    }
-    
-    private float SignedAngle(Vector3 a, Vector3 b){
-        var angle = Vector3.Angle(a, b); // calculate angle
-        // assume the sign of the cross product's Y component:
-        return angle * Mathf.Sign(Vector3.Cross(a, b).y);
     }
 
     public void ResetPerimeter()
