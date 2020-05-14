@@ -20,9 +20,7 @@ public class ARTapToPlaceObject : MonoBehaviour
     private bool _placementPoseIsValid = false;
 
     [SerializeField] private GameObject _placementIndicator;
-
-    [SerializeField] private GameObject _cornerPointPrefab;
-    [SerializeField] private GameObject _wallPrefab;
+   
     [SerializeField] private GameObject _propPrefab;
 
     [SerializeField] private LineRenderer _perimeterLine;
@@ -32,11 +30,13 @@ public class ARTapToPlaceObject : MonoBehaviour
     private bool _isPerimeterReady = false;
 
     private GameObject _indicator;
-
-    private List<GameObject> _corners;
-    private List<GameObject> _walls;
+    
     private List<GameObject> _props;
     private Camera _camera;
+
+    [SerializeField] private RoomData _roomPrefab;
+    
+    private RoomData _room;
 
     [SerializeField] private Text _distanceText;
 
@@ -46,8 +46,7 @@ public class ARTapToPlaceObject : MonoBehaviour
         _raycastManager = FindObjectOfType<ARRaycastManager>();
         _planeManager = FindObjectOfType<ARPlaneManager>();
         _perimeterLine.positionCount = 0;
-        _corners = new List<GameObject>();
-        _walls = new List<GameObject>();
+        _room = Instantiate(_roomPrefab);
         _props = new List<GameObject>();
         SetPlacementIndicator();
     }
@@ -61,17 +60,16 @@ public class ARTapToPlaceObject : MonoBehaviour
 
     private void UpdateDistanceValue()
     {
-        if (_corners.Count == 0) return;
+        if (!_room) return;
+        
+        if (_room.corners.Count == 0) return;
 
-        _distanceText.text = Vector3.Distance(_corners.Last().transform.position, _placementPose.position).ToString();
+        _distanceText.text = Vector3.Distance(_room.corners.Last().transform.position, _placementPose.position).ToString();
     }
 
     public void CreateCornerPoint() 
     {
-        var cornerPoint = Instantiate(_cornerPointPrefab);
-        _corners.Add(cornerPoint);
-        cornerPoint.transform.position = _placementPose.position;
-        cornerPoint.transform.rotation = Quaternion.Euler(0f, -Input.compass.magneticHeading, 0f);
+        _room.SetCorner(_placementPose.position);
         _perimeterLine.positionCount += 1;
         _perimeterLine.SetPosition(_perimeterLine.positionCount - 1, _placementPose.position);        
     }
@@ -82,49 +80,7 @@ public class ARTapToPlaceObject : MonoBehaviour
         _isPerimeterReady = true;
         _planeManager.enabled = false;
         
-        var cornerPoint = Instantiate(_cornerPointPrefab);
-        cornerPoint.transform.position = Utils.GetCentroid(_corners);
-        
-        for (int i = 0; i < _corners.Count; i++)
-        {
-            var previousCornerPos = _corners[i > 0 ? i - 1 : _corners.Count - 1].transform.position;
-            var currentCornerPos = _corners[i].transform.position;
-            var nextCornerPos = _corners[i < _corners.Count - 1 ? i + 1 : 0].transform.position;
-
-            var corner = _corners[i].AddComponent<Corner>();
-            corner.angle = Utils.GetSignedAngle(previousCornerPos - currentCornerPos, nextCornerPos - currentCornerPos);
-            
-            var wall = Instantiate(_wallPrefab);
-            _walls.Add(wall);
-            var wallMeshFilter = wall.GetComponent<MeshFilter>();
-
-            var triangles = new [] 
-            {
-                0, 3, 1,
-                3, 0, 2,
-                1, 3, 0,
-                2, 0, 3
-            };
-
-            var mesh = wallMeshFilter.mesh;
-            var normals = mesh.normals;
-
-            mesh = new Mesh();
-            wallMeshFilter.mesh = mesh;
-
-            var vertices = new Vector3[4];
-
-            vertices[0] = currentCornerPos;
-            vertices[1] = currentCornerPos + Vector3.up * 2.5f;
-            vertices[2] = nextCornerPos;
-            vertices[3] = nextCornerPos + Vector3.up * 2.5f;
-
-            mesh.vertices = vertices;
-            mesh.triangles = triangles;
-            mesh.normals = normals;
-
-            wall.AddComponent<MeshCollider>();
-        }
+        _room.SetPerimeter();
     }
 
     public void ResetPerimeter()
@@ -135,12 +91,10 @@ public class ARTapToPlaceObject : MonoBehaviour
         _perimeterLine.loop = false;
         _isFloorLevel = false;
         _isPerimeterReady = false;
-        _corners.ForEach(Destroy);
-        _walls.ForEach(Destroy);
         _props.ForEach(Destroy);
-        _walls.Clear();
         _props.Clear();
-        _corners.Clear();
+        Destroy(_room.gameObject);
+        _room = Instantiate(_roomPrefab);
     }
 
     public void SetFloorLevel() 
@@ -168,9 +122,9 @@ public class ARTapToPlaceObject : MonoBehaviour
         SetPlacementIndicator();
         if (_placementPoseIsValid)
         {
-            var minDistance = _corners.Min(c => Vector3.Distance(c.transform.position, _placementPose.position));
+            var minDistance = _room.corners.Min(c => Vector3.Distance(c.transform.position, _placementPose.position));
             
-            var prop = Instantiate(_propPrefab, _corners.First(c => Math.Abs(Vector3.Distance(c.transform.position, _placementPose.position) - minDistance) < 0.01f).transform.position, _placementPose.rotation);
+            var prop = Instantiate(_propPrefab, _room.corners.First(c => Math.Abs(Vector3.Distance(c.transform.position, _placementPose.position) - minDistance) < 0.01f).transform.position, _placementPose.rotation);
             prop.SetActive(true);
             _props.Add(prop);
         }

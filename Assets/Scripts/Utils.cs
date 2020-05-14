@@ -9,10 +9,10 @@ public static class Utils
         return angle * Mathf.Sign(Vector3.Cross(a, b).y);
     }
     
-    public static Vector3 GetCentroid(List<GameObject> points)
+    public static Vector3 GetCentroid<T>(List<T> points) where T : MonoBehaviour
     {
         Vector3 pos = Vector3.zero;
-        foreach(GameObject p in points)
+        foreach(T p in points)
         {
             pos += p.transform.position;
         }

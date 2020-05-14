@@ -151,12 +151,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _placementIndicator: {fileID: 507568775}
-  _cornerPointPrefab: {fileID: 9055869607866247474, guid: d7ae8dc08bd4ac8439801549f93f0521,
-    type: 3}
-  _wallPrefab: {fileID: 5518871238141779664, guid: 8f0206b0c964ca34982ff6d89e999076,
-    type: 3}
   _propPrefab: {fileID: 401867443}
   _perimeterLine: {fileID: 1824139936}
+  _roomPrefab: {fileID: 3740841440332438412, guid: 5c754af1102b03c4296312ed5fa174eb,
+    type: 3}
   _distanceText: {fileID: 1450198609}
 --- !u!4 &14651087
 Transform:
