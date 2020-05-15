@@ -8,18 +8,11 @@ public class RoomData : MonoBehaviour
     [SerializeField] private Corner _cornerPref;
     [SerializeField] private Wall _wallPref;
     
-    public List<Wall> walls;
-    public List<Corner> corners;
+    public List<Wall> walls = new List<Wall>();
+    public List<Corner> corners = new List<Corner>();
 
-    public Vector3 roomCentroid;
+    public Vector3 RoomCentroid => Utils.GetCentroid(corners);
     
-    // Start is called before the first frame update
-    void Awake()
-    {
-        corners = new List<Corner>();
-        walls = new List<Wall>();
-    }
-
     public void SetCorner(Vector3 pos)
     {
         var cornerPoint = Instantiate(_cornerPref, transform);
@@ -29,8 +22,6 @@ public class RoomData : MonoBehaviour
 
     public void SetPerimeter()
     {
-        roomCentroid = Utils.GetCentroid(corners);
-        
         for (int i = 0; i < corners.Count; i++)
         {
             var previousCornerPos = corners[i > 0 ? i - 1 : corners.Count - 1].transform.position;
@@ -44,5 +35,12 @@ public class RoomData : MonoBehaviour
 
             walls.Add(wall);
         }
+    }
+
+    public void PlaceRoomToCentroid()
+    {
+        var rootObject = new GameObject($"{gameObject.name}Root");
+        rootObject.transform.position = RoomCentroid;
+        transform.parent = rootObject.transform;
     }
 }

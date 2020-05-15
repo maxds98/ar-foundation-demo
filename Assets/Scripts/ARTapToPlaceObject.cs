@@ -39,6 +39,7 @@ public class ARTapToPlaceObject : MonoBehaviour
     private RoomData _room;
 
     [SerializeField] private Text _distanceText;
+    [SerializeField] private Text _angleText;
 
     void Start()
     {        
@@ -55,13 +56,23 @@ public class ARTapToPlaceObject : MonoBehaviour
     {
         UpdatePlacementPoint();
         UpdateIndicator();
+        if (!_room) return;
         UpdateDistanceValue();
+        UpdateCornerAngle();
+    }
+
+    private void UpdateCornerAngle()
+    {
+        if (_room.corners.Count < 2) return;
+
+        var previousCornerPos = _room.corners[_room.corners.Count - 2].Position;
+        var currentCornerPos = _room.corners.Last().Position;
+        
+        _angleText.text = Utils.GetSignedAngle(previousCornerPos - currentCornerPos, _placementPose.position - currentCornerPos).ToString();
     }
 
     private void UpdateDistanceValue()
     {
-        if (!_room) return;
-        
         if (_room.corners.Count == 0) return;
 
         _distanceText.text = Vector3.Distance(_room.corners.Last().transform.position, _placementPose.position).ToString();
@@ -81,6 +92,8 @@ public class ARTapToPlaceObject : MonoBehaviour
         _planeManager.enabled = false;
         
         _room.SetPerimeter();
+        
+        RoomSynchronizer.Instance.SynchronizeRooms(_room);
     }
 
     public void ResetPerimeter()
