@@ -68,14 +68,14 @@ public class ARTapToPlaceObject : MonoBehaviour
         var previousCornerPos = _room.corners[_room.corners.Count - 2].Position;
         var currentCornerPos = _room.corners.Last().Position;
         
-        _angleText.text = Utils.GetSignedAngle(previousCornerPos - currentCornerPos, _placementPose.position - currentCornerPos).ToString();
+        _angleText.text =$"Corner: {Math.Round(Utils.GetSignedAngle(previousCornerPos - currentCornerPos, _placementPose.position - currentCornerPos), 2)}°";
     }
 
     private void UpdateDistanceValue()
     {
         if (_room.corners.Count == 0) return;
 
-        _distanceText.text = Vector3.Distance(_room.corners.Last().transform.position, _placementPose.position).ToString();
+        _distanceText.text =$"Length: {Math.Round(Vector3.Distance(_room.corners.Last().transform.position, _placementPose.position), 2)} m";
     }
 
     public void CreateCornerPoint() 

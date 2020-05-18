@@ -28,9 +28,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Utils.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Corner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Editor/RoomDataEditor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RoomData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RoomSynchronizer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" />
       </list>
     </option>
   </component>
@@ -86,6 +86,7 @@
       <workItem from="1589378430448" duration="7883000" />
       <workItem from="1589463924750" duration="6448000" />
       <workItem from="1589531806009" duration="7821000" />
+      <workItem from="1589788501905" duration="979000" />
     </task>
     <servers />
   </component>
