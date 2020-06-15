@@ -12,7 +12,40 @@ public class RoomData : MonoBehaviour
     public List<Corner> corners = new List<Corner>();
 
     public Vector3 RoomCentroid => Utils.GetCentroid(corners);
-    
+
+    public void SetRoomDataFromJson(string fileName)
+    {
+        var jsonObject = JsonLoader.LoadJsonFromFile(fileName);
+
+        _cornerPref = new GameObject("corner").AddComponent<Corner>();
+        _wallPref = Resources.Load<Wall>("Wall");
+        
+        if (jsonObject.ContainsKey("items"))
+        {
+            foreach (var item in jsonObject["items"].Array)
+            {
+                var posObj = item.Obj.GetObject("position");
+                var position = JsonLoader.GetVector3(posObj);
+                if (item.Obj["type"].Str == "corner")
+                {
+                    SetCorner(position);
+                }
+
+                if (item.Obj["type"].Str == "prop")
+                {
+                    var propPrefab = Resources.Load<GameObject>($"props/{item.Obj.GetString("name")}");
+                    var prop = Instantiate(propPrefab, transform, true);
+                    prop.transform.localPosition = position;
+
+                    var rotationObj = item.Obj.GetObject("rotation");
+                    prop.transform.localRotation = Quaternion.Euler(JsonLoader.GetVector3(rotationObj));
+                }
+            }
+        }
+        PlaceRoomToCentroid();
+        RoomPlanVisualizer.Instance.BuildWalls(this);
+    }
+
     public void SetCorner(Vector3 pos)
     {
         var cornerPoint = Instantiate(_cornerPref, transform);

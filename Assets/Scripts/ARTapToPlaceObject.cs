@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using Services;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -41,6 +42,13 @@ public class ARTapToPlaceObject : MonoBehaviour
     [SerializeField] private Text _distanceText;
     [SerializeField] private Text _angleText;
 
+    private IRoomSyncService _roomSyncService;
+
+    private void Awake()
+    {
+        _roomSyncService = ServiceLocator.GetService<IRoomSyncService>();
+    }
+
     void Start()
     {        
         _camera = Camera.main;
@@ -50,6 +58,7 @@ public class ARTapToPlaceObject : MonoBehaviour
         _room = Instantiate(_roomPrefab);
         _props = new List<GameObject>();
         SetPlacementIndicator();
+        RoomPlanVisualizer.Instance.OnRoomConfig += SetPerimeter;
     }
 
     void Update()
@@ -85,15 +94,20 @@ public class ARTapToPlaceObject : MonoBehaviour
         _perimeterLine.SetPosition(_perimeterLine.positionCount - 1, _placementPose.position);        
     }
 
+    public void GenerateRoomFromJson()
+    {
+        _roomSyncService.GenerateTestRoom();
+    }
+
     public void SetPerimeter() 
     {
         _perimeterLine.loop = true;
         _isPerimeterReady = true;
         _planeManager.enabled = false;
         
-        _room.SetPerimeter();
+        //_room.SetPerimeter();
         
-        RoomSynchronizer.Instance.SynchronizeRooms(_room);
+        _roomSyncService.SynchronizeRooms(_room);
     }
 
     public void ResetPerimeter()

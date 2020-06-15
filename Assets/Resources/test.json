@@ -1,0 +1,50 @@
+{
+  "items": [
+    {
+      "type": "corner",
+      "position": {
+        "x": -2,
+        "y": 0,
+        "z": -1.5
+      }
+    },
+    {
+      "type": "corner",
+      "position": {
+        "x": -2,
+        "y": 0,
+        "z": 1.5
+      }
+    },
+    {
+      "type": "corner",
+      "position": {
+        "x": 3,
+        "y": 0,
+        "z": 1.5
+      }
+    },
+    {
+      "type": "corner",
+      "position": {
+        "x": 3,
+        "y": 0,
+        "z": -1.5
+      }
+    },
+    {
+      "type": "prop",
+      "name": "cornerKitchen",
+      "position":{
+        "x": 0.15,
+        "y": 0,
+        "z": -1.42
+      },
+      "rotation":{
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    }
+    ]
+}

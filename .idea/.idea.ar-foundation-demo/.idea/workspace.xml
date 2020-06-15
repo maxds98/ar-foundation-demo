@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6493ba42-6155-44c5-bc4c-009a2c8591cf" name="Default Changelist" comment="" />
+    <list default="true" id="6493ba42-6155-44c5-bc4c-009a2c8591cf" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CornerKitchen.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CornerKitchen.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Placement Indicator.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Placement Indicator.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Room1Root.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Room1Root.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomPrefab.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Corner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Corner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoomData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RoomData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoomSynchronizer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoomSynchronizer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,14 +30,21 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ARSessionController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Services/RoomSyncService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Boomlagoon/JSON/TestScene/JSONObjectTester.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Corner.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RoomData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utils.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Editor/RoomDataEditor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Wall.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RoomSynchronizer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Services/IRoomSyncService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ARSessionController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/JsonLoader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Boomlagoon/JSON/JSONObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RoomData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Editor/RoomDataEditor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ServiceLocator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ServiceLocatorInitializer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RoomPlanVisualizer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Wall.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -26,11 +52,20 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/ARSessionController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Wall.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Utils.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Corner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Editor/RoomDataEditor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/RoomData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RoomSynchronizer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RoomSyncService.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ServiceLocatorInitializer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Boomlagoon/JSON/TestScene/JSONObjectTester.cs" />
+        <option value="$PROJECT_DIR$/Assets/Boomlagoon/JSON/JSONObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/test.json" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/JsonLoader.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RoomData.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Services/IRoomSyncService.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Services/RoomSyncService.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Corner.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RoomPlanVisualizer.cs" />
       </list>
     </option>
   </component>
@@ -87,6 +122,28 @@
       <workItem from="1589463924750" duration="6448000" />
       <workItem from="1589531806009" duration="7821000" />
       <workItem from="1589788501905" duration="979000" />
+      <workItem from="1590063757685" duration="1364000" />
+      <workItem from="1590492202468" duration="3594000" />
+      <workItem from="1591280367642" duration="869000" />
+      <workItem from="1591755736397" duration="1608000" />
+      <workItem from="1591757601249" duration="1793000" />
+      <workItem from="1591759418691" duration="1842000" />
+      <workItem from="1591761325187" duration="1792000" />
+      <workItem from="1591763145106" duration="2008000" />
+      <workItem from="1591791600661" duration="1375000" />
+      <workItem from="1592228457084" duration="1792000" />
+      <workItem from="1592230323419" duration="1986000" />
+      <workItem from="1592232385379" duration="1802000" />
+      <workItem from="1592234211311" duration="1790000" />
+      <workItem from="1592236019327" duration="1861000" />
+      <workItem from="1592239164803" duration="759000" />
+      <workItem from="1592242069281" duration="1792000" />
+      <workItem from="1592244015630" duration="1794000" />
+      <workItem from="1592245840800" duration="43000" />
+      <workItem from="1592245900097" duration="1446000" />
+      <workItem from="1592247972579" duration="1898000" />
+      <workItem from="1592250459216" duration="1813000" />
+      <workItem from="1592252306430" duration="1578000" />
     </task>
     <servers />
   </component>
@@ -95,4 +152,23 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="943" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1592234536571">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="943" y="225" width="672" height="678" key="search.everywhere.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1592234536571" />
+  </component>
 </project>

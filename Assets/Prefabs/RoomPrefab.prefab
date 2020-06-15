@@ -49,4 +49,3 @@ MonoBehaviour:
     type: 3}
   walls: []
   corners: []
-  roomCentroid: {x: 0, y: 0, z: 0}
