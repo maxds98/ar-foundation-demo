@@ -11,6 +11,7 @@ public class RoomPlanVisualizer : MonoBehaviour
     private LineRenderer _walls;
 
     public List<GameObject> cornerObjects = new List<GameObject>();
+    private List<GameObject> _propObjects = new List<GameObject>();
 
     public List<int> cornerIndexes = new List<int>();
 
@@ -38,7 +39,9 @@ public class RoomPlanVisualizer : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out hit);
+            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+            
+            Physics.Raycast(ray, out hit);
             if (hit.collider != null)
             {
                 if (hit.collider.CompareTag("Corner"))
@@ -53,6 +56,7 @@ public class RoomPlanVisualizer : MonoBehaviour
         {
             _walls.enabled = false;
             cornerObjects.ForEach(c => c.SetActive(false));
+            _propObjects.ForEach(p => p.SetActive(false));
             OnRoomConfig?.Invoke();
             _isMarked = true;
         }
@@ -70,6 +74,14 @@ public class RoomPlanVisualizer : MonoBehaviour
             c.transform.localPosition = corner.Position;
             c.tag = "Corner";
             cornerObjects.Add(c);
+        }
+
+        foreach (var prop in room.props)
+        {
+            var p = Instantiate(prop, transform);
+            p.transform.localPosition = prop.transform.localPosition;
+            p.transform.localRotation = prop.transform.localRotation;
+            _propObjects.Add(p);
         }
     }
 

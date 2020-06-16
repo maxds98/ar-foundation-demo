@@ -10,6 +10,7 @@ public class RoomData : MonoBehaviour
     
     public List<Wall> walls = new List<Wall>();
     public List<Corner> corners = new List<Corner>();
+    public List<GameObject> props = new List<GameObject>();
 
     public Vector3 RoomCentroid => Utils.GetCentroid(corners);
 
@@ -39,6 +40,8 @@ public class RoomData : MonoBehaviour
 
                     var rotationObj = item.Obj.GetObject("rotation");
                     prop.transform.localRotation = Quaternion.Euler(JsonLoader.GetVector3(rotationObj));
+                    
+                    props.Add(prop);
                 }
             }
         }

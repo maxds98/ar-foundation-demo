@@ -2,24 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6493ba42-6155-44c5-bc4c-009a2c8591cf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CornerKitchen.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CornerKitchen.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Placement Indicator.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Placement Indicator.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Room1Root.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Room1Root.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Corner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Corner.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoomData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RoomData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoomSynchronizer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoomSynchronizer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoomPlanVisualizer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RoomPlanVisualizer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +30,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Editor/RoomDataEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ServiceLocator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ServiceLocatorInitializer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RoomPlanVisualizer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Wall.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -60,11 +49,11 @@
         <option value="$PROJECT_DIR$/Assets/Boomlagoon/JSON/JSONObject.cs" />
         <option value="$PROJECT_DIR$/Assets/test.json" />
         <option value="$PROJECT_DIR$/Assets/Scripts/JsonLoader.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/RoomData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Services/IRoomSyncService.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Services/RoomSyncService.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Corner.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RoomData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RoomPlanVisualizer.cs" />
       </list>
     </option>
@@ -144,6 +133,8 @@
       <workItem from="1592247972579" duration="1898000" />
       <workItem from="1592250459216" duration="1813000" />
       <workItem from="1592252306430" duration="1578000" />
+      <workItem from="1592295612026" duration="2068000" />
+      <workItem from="1592297739190" duration="1097000" />
     </task>
     <servers />
   </component>
