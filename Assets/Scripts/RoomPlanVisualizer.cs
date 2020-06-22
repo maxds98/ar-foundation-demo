@@ -8,20 +8,45 @@ public class RoomPlanVisualizer : MonoBehaviour
 {
     public static RoomPlanVisualizer Instance;
 
+    /// <summary>
+    /// Line object to draw 2D plan walls.
+    /// </summary>
     private LineRenderer _walls;
 
-    public List<GameObject> cornerObjects = new List<GameObject>();
+    /// <summary>
+    /// List of plan corners.
+    /// </summary>
+    private List<GameObject> _cornerObjects = new List<GameObject>();
+    
+    /// <summary>
+    /// List of plan props.
+    /// </summary>
     private List<GameObject> _propObjects = new List<GameObject>();
 
+    /// <summary>
+    /// List of corner indexes to sync rooms.
+    /// </summary>
     public List<int> cornerIndexes = new List<int>();
 
-    private Camera _camera;
-
+    /// <summary>
+    /// Action that invoked when the sync corners ware marked on 2D plan visualisation.
+    /// </summary>
     public event Action OnRoomConfig;
 
-    private bool _isMarked = false;
+    /// <summary>
+    /// Indicates if corners ware marked.
+    /// </summary>
+    private bool _isMarked;
 
+    /// <summary>
+    /// corner prefab to instantiate on 2D plan.
+    /// </summary>
     [SerializeField] private GameObject cornerPref;
+    
+    /// <summary>
+    /// Main camera object.
+    /// </summary>
+    private Camera _camera;
     
     // Start is called before the first frame update
     void Awake()
@@ -30,7 +55,6 @@ public class RoomPlanVisualizer : MonoBehaviour
         _walls = GetComponentInChildren<LineRenderer>();
         _camera = Camera.main;
     }
-
 
     void Update()
     {
@@ -47,7 +71,7 @@ public class RoomPlanVisualizer : MonoBehaviour
                 if (hit.collider.CompareTag("Corner"))
                 {
                     hit.collider.GetComponent<MeshRenderer>().material.color = Color.red;
-                    cornerIndexes.Add(cornerObjects.IndexOf(hit.collider.gameObject));
+                    cornerIndexes.Add(_cornerObjects.IndexOf(hit.collider.gameObject));
                 }
             }
         }
@@ -55,14 +79,18 @@ public class RoomPlanVisualizer : MonoBehaviour
         if (cornerIndexes.Count >= 2)
         {
             _walls.enabled = false;
-            cornerObjects.ForEach(c => c.SetActive(false));
+            _cornerObjects.ForEach(c => c.SetActive(false));
             _propObjects.ForEach(p => p.SetActive(false));
             OnRoomConfig?.Invoke();
             _isMarked = true;
         }
     }
 
-    public void BuildWalls(RoomData room)
+    /// <summary>
+    /// Generates 2D plan of the room with the corners, props and walls on it.
+    /// </summary>
+    /// <param name="room">Room data to be built.</param>
+    public void Build2DPlan(RoomData room)
     {
         _walls.enabled = true;
         _walls.positionCount = room.corners.Count;
@@ -73,7 +101,7 @@ public class RoomPlanVisualizer : MonoBehaviour
             var c = Instantiate(cornerPref, transform);
             c.transform.localPosition = corner.Position;
             c.tag = "Corner";
-            cornerObjects.Add(c);
+            _cornerObjects.Add(c);
         }
 
         foreach (var prop in room.props)

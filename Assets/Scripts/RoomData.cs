@@ -46,7 +46,7 @@ public class RoomData : MonoBehaviour
             }
         }
         PlaceRoomToCentroid();
-        RoomPlanVisualizer.Instance.BuildWalls(this);
+        RoomPlanVisualizer.Instance.Build2DPlan(this);
     }
 
     public void SetCorner(Vector3 pos)

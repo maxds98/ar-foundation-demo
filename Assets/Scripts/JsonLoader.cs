@@ -7,9 +7,21 @@ using UnityEngine;
 
 public static class JsonLoader
 {
+    /// <summary>
+    ///  Path to the JSON file.
+    /// </summary>
     private static string _path;
+    
+    /// <summary>
+    /// JSON object from the file.
+    /// </summary>
     private static JSONObject _jsonObject;
     
+    /// <summary>
+    /// Loading JSON from the file.
+    /// </summary>
+    /// <param name="name">File name.</param>
+    /// <returns>JSON object.</returns>
     public static JSONObject LoadJsonFromFile(string name)
     {
         _path = $"{Application.dataPath}/{name}";
@@ -36,6 +48,11 @@ public static class JsonLoader
         }
     }
 
+    /// <summary>
+    /// Parse vector3 from the JSON object.
+    /// </summary>
+    /// <param name="obj">Passed JSON object.</param>
+    /// <returns>Vector3 from the JSONObject.</returns>
     public static Vector3 GetVector3(JSONObject obj)
     {
         return new Vector3(

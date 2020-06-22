@@ -4,9 +4,12 @@
     <list default="true" id="6493ba42-6155-44c5-bc4c-009a2c8591cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ar-foundation-demo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/JsonLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/JsonLoader.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoomData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RoomData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoomPlanVisualizer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RoomPlanVisualizer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Wall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Wall.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +42,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/ARSessionController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Wall.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Utils.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Editor/RoomDataEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RoomSynchronizer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RoomSyncService.cs" />
@@ -48,13 +49,15 @@
         <option value="$PROJECT_DIR$/Assets/Boomlagoon/JSON/TestScene/JSONObjectTester.cs" />
         <option value="$PROJECT_DIR$/Assets/Boomlagoon/JSON/JSONObject.cs" />
         <option value="$PROJECT_DIR$/Assets/test.json" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/JsonLoader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Services/IRoomSyncService.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Services/RoomSyncService.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Corner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RoomData.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Wall.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Utils.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ARTapToPlaceObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RoomPlanVisualizer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/JsonLoader.cs" />
       </list>
     </option>
   </component>
@@ -135,6 +138,9 @@
       <workItem from="1592252306430" duration="1578000" />
       <workItem from="1592295612026" duration="2068000" />
       <workItem from="1592297739190" duration="1097000" />
+      <workItem from="1592848572888" duration="1789000" />
+      <workItem from="1592850391840" duration="1789000" />
+      <workItem from="1592852208889" duration="931000" />
     </task>
     <servers />
   </component>

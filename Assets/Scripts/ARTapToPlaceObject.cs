@@ -16,34 +16,81 @@ public class ARTapToPlaceObject : MonoBehaviour
     private ARRaycastManager _raycastManager;
     private ARPlaneManager _planeManager;
 
+    /// <summary>
+    /// Store placement indicator position and rotation.
+    /// </summary>
     private Pose _placementPose;
 
-    private bool _placementPoseIsValid = false;
+    /// <summary>
+    /// Shows if placement indicator is able to be placed.
+    /// </summary>
+    private bool _placementPoseIsValid;
 
+    /// <summary>
+    /// Placement indicator prefab.
+    /// </summary>
     [SerializeField] private GameObject _placementIndicator;
    
+    /// <summary>
+    /// Prop indicator prefab.
+    /// </summary>
     [SerializeField] private GameObject _propPrefab;
 
+    /// <summary>
+    /// Line object that is used to draw walls edges.
+    /// </summary>
     [SerializeField] private LineRenderer _perimeterLine;
+    
+    /// <summary>
+    /// Floor height value.
+    /// </summary>
     private float _floorLevel;
+    
+    /// <summary>
+    /// Indicates if floor level was calibrated.
+    /// </summary>
     private bool _isFloorLevel;
 
-    private bool _isPerimeterReady = false;
+    /// <summary>
+    /// Indicates if room corners have been added.
+    /// </summary>
+    private bool _isPerimeterReady;
 
+    /// <summary>
+    /// Indicator object.
+    /// </summary>
     private GameObject _indicator;
     
+    /// <summary>
+    /// Added props list.
+    /// </summary>
     private List<GameObject> _props;
-    private Camera _camera;
 
+    /// <summary>
+    /// Room prefab to be instantiated.
+    /// </summary>
     [SerializeField] private RoomData _roomPrefab;
     
+    /// <summary>
+    /// Instantiated room.
+    /// </summary>
     private RoomData _room;
 
+    /// <summary>
+    /// Text field to show distance between corners.
+    /// </summary>
     [SerializeField] private Text _distanceText;
-    [SerializeField] private Text _angleText;
-
+    
+    /// <summary>
+    /// Service to sync AR room and room from JSON.
+    /// </summary>
     private IRoomSyncService _roomSyncService;
 
+    /// <summary>
+    /// Main camera object.
+    /// </summary>
+    private Camera _camera;
+    
     private void Awake()
     {
         _roomSyncService = ServiceLocator.GetService<IRoomSyncService>();
@@ -67,19 +114,11 @@ public class ARTapToPlaceObject : MonoBehaviour
         UpdateIndicator();
         if (!_room) return;
         UpdateDistanceValue();
-        UpdateCornerAngle();
-    }
+    }   
 
-    private void UpdateCornerAngle()
-    {
-        if (_room.corners.Count < 2) return;
-
-        var previousCornerPos = _room.corners[_room.corners.Count - 2].Position;
-        var currentCornerPos = _room.corners.Last().Position;
-        
-        _angleText.text =$"Corner: {Math.Round(Utils.GetSignedAngle(previousCornerPos - currentCornerPos, _placementPose.position - currentCornerPos), 2)}°";
-    }
-
+    /// <summary>
+    /// Calculates current wall length.
+    /// </summary>
     private void UpdateDistanceValue()
     {
         if (_room.corners.Count == 0) return;
@@ -87,29 +126,41 @@ public class ARTapToPlaceObject : MonoBehaviour
         _distanceText.text =$"Length: {Math.Round(Vector3.Distance(_room.corners.Last().transform.position, _placementPose.position), 2)} m";
     }
 
+    /// <summary>
+    /// Creates AR room corner key point.
+    /// </summary>
     public void CreateCornerPoint() 
     {
         _room.SetCorner(_placementPose.position);
-        _perimeterLine.positionCount += 1;
-        _perimeterLine.SetPosition(_perimeterLine.positionCount - 1, _placementPose.position);        
+        var positionCount = _perimeterLine.positionCount;
+        positionCount += 1;
+        _perimeterLine.positionCount = positionCount;
+        _perimeterLine.SetPosition(positionCount - 1, _placementPose.position);        
     }
-
+    
+    /// <summary>
+    /// For the proof of concept it generates test hardcoded room.
+    /// </summary>
     public void GenerateRoomFromJson()
     {
         _roomSyncService.GenerateTestRoom();
     }
 
-    public void SetPerimeter() 
+    /// <summary>
+    /// Disables plane manager to stop defining new surfaces and synchronizing AR room and room generated from JSON.
+    /// </summary>
+    private void SetPerimeter() 
     {
         _perimeterLine.loop = true;
         _isPerimeterReady = true;
         _planeManager.enabled = false;
         
-        //_room.SetPerimeter();
-        
         _roomSyncService.SynchronizeRooms(_room);
     }
 
+    /// <summary>
+    /// Resets all managers, rooms and placed points and props.
+    /// </summary>
     public void ResetPerimeter()
     {
         _perimeterLine.positionCount = 0;
@@ -124,12 +175,18 @@ public class ARTapToPlaceObject : MonoBehaviour
         _room = Instantiate(_roomPrefab);
     }
 
+    /// <summary>
+    /// Calibrates the floor level in app world coordinates.
+    /// </summary>
     public void SetFloorLevel() 
     {
         _floorLevel = _placementPose.position.y;
         _isFloorLevel = true;
     }
 
+    /// <summary>
+    /// Applies placement indicator prefab.
+    /// </summary>
     private void SetPlacementIndicator() 
     {       
         _indicator = _placementIndicator;
@@ -137,6 +194,9 @@ public class ARTapToPlaceObject : MonoBehaviour
         _propPrefab.SetActive(false);
     }
 
+    /// <summary>
+    /// Applies prop indicator prefab.
+    /// </summary>
     public void SetPropIndicator() 
     {
         _indicator = _propPrefab;
@@ -144,6 +204,9 @@ public class ARTapToPlaceObject : MonoBehaviour
         _propPrefab.SetActive(true);
     }
 
+    /// <summary>
+    /// Adding prop to the scene.
+    /// </summary>
     public void PlaceProp() 
     {
         SetPlacementIndicator();
@@ -157,6 +220,9 @@ public class ARTapToPlaceObject : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates indicator state.
+    /// </summary>
     private void UpdateIndicator()
     {
         if (_placementPoseIsValid)
@@ -170,6 +236,9 @@ public class ARTapToPlaceObject : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Calculates placement indicator position and rotation.
+    /// </summary>
     private void UpdatePlacementPoint() 
     {
         var screenCenter = _camera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, 0.5f));

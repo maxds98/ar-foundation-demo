@@ -4,23 +4,32 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    public Vector3 A;
-    public Vector3 B;
+    public Vector3 a;
+    public Vector3 b;
 
-    public float lenght;
+    public float length;
 
-    public Wall SetWall(Vector3 a, Vector3 b)
+    /// <summary>
+    /// Generates the wall from 2 points and calculating it length.
+    /// </summary>
+    /// <param name="aPoint">The wall start point.</param>
+    /// <param name="bPoint">The wall end point</param>
+    /// <returns></returns>
+    public Wall SetWall(Vector3 aPoint, Vector3 bPoint)
     {
-        A = a;
-        B = b;
+        this.a = aPoint;
+        this.b = bPoint;
 
-        lenght = Vector3.Distance(A, B);
+        length = Vector3.Distance(this.a, this.b);
         
         GenerateWallMesh();
 
         return this;
     }
 
+    /// <summary>
+    /// Generates double sided wall mesh.
+    /// </summary>
     private void GenerateWallMesh()
     {
         var wallMeshFilter = GetComponent<MeshFilter>();
@@ -41,10 +50,10 @@ public class Wall : MonoBehaviour
 
         var vertices = new Vector3[4];
 
-        vertices[0] = A;
-        vertices[1] = A + Vector3.up * 2.5f;
-        vertices[2] = B;
-        vertices[3] = B + Vector3.up * 2.5f;
+        vertices[0] = a;
+        vertices[1] = a + Vector3.up * 2.5f;
+        vertices[2] = b;
+        vertices[3] = b + Vector3.up * 2.5f;
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
